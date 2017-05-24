@@ -1,0 +1,35 @@
+http://www.ideserve.co.in/learn/find-the-missing-number-in-the-duplicate-array
+
+public class MissingNumber{
+	
+	public static void main(String[] args){
+		int[] arr1 = {9, 7, 8, 5, 4, 6, 3, 2, 1};
+		int[] arr2 = {2,4,3,9,1,8,5,6};
+		
+		System.out.println(missingNumber(arr1, arr2));
+		System.out.println(missingNumberXOR(arr1, arr2));
+	}
+	
+	private static int missingNumber(int[] arr1, int[] arr2){
+		int x = 0;	
+		for(int i = 0 ; i < arr1.length ; i++){
+			x += arr1[i];
+		}
+		for(int i = 0 ; i < arr2.length ; i++){
+			x -= arr2[i];
+		}
+		return x;
+	}
+	
+	private static int missingNumberXOR(int[] arr1, int[] arr2){
+		int x = 0;
+		for(int i = 0 ; i < arr1.length ; i++){
+			x = x ^ arr1[i];
+		}
+		for(int i = 0 ; i < arr2.length ; i++){
+			x = x ^ arr2[i];
+		}
+		
+		return x;
+	}
+}
