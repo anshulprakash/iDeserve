@@ -1,0 +1,33 @@
+/*http://www.ideserve.co.in/learn/tower-of-hanoi-algorithm*/
+
+public class TowerOfHanoiPuzzle {
+ 
+    int steps = 0;
+    public void solve(int n, String srcTower, String intermediateTower, String destTower)
+    {
+        if (n == 1)
+        {
+            System.out.println("Move topmost disk from " + srcTower + " to " + destTower);
+             
+            steps += 1;
+             
+            return;
+        }
+         
+        // first move top n-1 disks to intermediate tower using destination tower
+        solve(n-1, srcTower, destTower, intermediateTower);
+         
+        // then move the last disk remaining on source tower to destination tower
+        solve(1,   srcTower, intermediateTower, destTower);
+         
+        // and finally move n-1 disks which are now in intermediate tower to dest tower using source tower 
+        solve(n-1, intermediateTower, srcTower, destTower);
+    }
+     
+    public static void main(String args[])
+    {
+        TowerOfHanoiPuzzle problem = new TowerOfHanoiPuzzle();
+         
+        problem.solve(3, "A", "B", "C");
+    }
+}
