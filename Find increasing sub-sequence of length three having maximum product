@@ -1,0 +1,75 @@
+/* http://www.ideserve.co.in/learn/increasing-subsequence-of-length-three-for-maximum-product */
+
+public class SubsequenceMaxProduct 
+{
+     
+    private int findLeftLargest(int[] array, int index)
+    {
+        int maxValue = -1, maxIndex = -1;
+        for (int i = 0; i < index; i++)
+        {
+            if ((array[i] < array[index]) && (array[i] > maxValue))
+            {
+                maxValue = array[i];
+                maxIndex =i;
+            }
+        }
+         
+        return maxIndex;
+    }
+     
+    private int findRightLargest(int[] array, int index)
+    {
+        int maxValue = -1, maxIndex = -1;
+        for (int i = index+1; i < array.length; i++)
+        {
+            if ((array[i] > array[index]) && (array[i] > maxValue))
+            {
+                maxValue = array[i];
+                maxIndex =i;
+            }
+        }
+         
+        return maxIndex;
+    }
+     
+    public void findSequence(int[] array, int[] sequence)
+    {
+        int maxProduct = 0;
+        for (int i = 0; i < array.length; i++)
+        {
+            // find largest element which is less than a[i] in the left sub-array
+            int leftLargestIndex = findLeftLargest(array, i);
+            int leftLargestValue = leftLargestIndex == -1 ? 0:array[leftLargestIndex];
+             
+            // find largest element greater than a[i] in the right subarray
+            int rightLargestIndex = findRightLargest(array, i);
+            int rightLargestValue = rightLargestIndex == -1 ? 0:array[rightLargestIndex];
+             
+            if (leftLargestValue*array[i]*rightLargestValue > maxProduct)
+            {
+                maxProduct = array[leftLargestIndex]*array[i]*array[rightLargestIndex];
+                sequence[0] = leftLargestValue;
+                sequence[1] = array[i];
+                sequence[2] = rightLargestValue;
+            }
+        }
+    }
+     
+    public static void main(String[] args) 
+    {
+        SubsequenceMaxProduct solution = new SubsequenceMaxProduct(); 
+         
+        int[] testArray =  {6, 1, 2, 3, 19, 10, 7};
+         
+        int[] sequence = new int[3]; 
+        solution.findSequence(testArray,sequence);
+         
+        System.out.println("Increasing Sub-sequence of which would yield maximum product is: " );
+        for (int i = 0; i < sequence.length; i++)
+        {
+            System.out.print(sequence[i] + ", ");
+        }
+    }
+}
+   
